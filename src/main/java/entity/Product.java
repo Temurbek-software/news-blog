@@ -1,4 +1,7 @@
 package entity;
+
+
+import javax.xml.crypto.Data;
 import java.util.Date;
 
 public class Product {
@@ -9,31 +12,15 @@ public class Product {
     private Date createdTime;
     private String photofile;
 
-    public Product()
-    {
+    public Product() {
     }
 
-    public Product(Long id,
-                   String titles,
+    public Product(Long id, String titles,
                    String description,
                    String sourcelinkTo,
                    Date createdTime,
-                   String photofile)
-    {
+                   String photofile) {
         this.id = id;
-        this.titles = titles;
-        this.description = description;
-        this.sourcelinkTo = sourcelinkTo;
-        this.createdTime = createdTime;
-        this.photofile = photofile;
-    }
-
-    public Product(String titles,
-                   String description,
-                   String sourcelinkTo,
-                   Date createdTime,
-                   String photofile)
-    {
         this.titles = titles;
         this.description = description;
         this.sourcelinkTo = sourcelinkTo;
@@ -88,17 +75,4 @@ public class Product {
     public void setPhotofile(String photofile) {
         this.photofile = photofile;
     }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", titles='" + titles + '\'' +
-                ", description='" + description + '\'' +
-                ", sourcelinkTo='" + sourcelinkTo + '\'' +
-                ", createdTime=" + createdTime +
-                ", photofile='" + photofile + '\'' +
-                '}';
-    }
-
 }

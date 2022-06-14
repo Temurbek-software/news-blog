@@ -11,6 +11,6 @@ public interface UserService {
 
     List<Users> getAll();
 
-    boolean delete(Long id) throws SQLException;
+    boolean delete(Long id) throws SQLException ;
 
 }

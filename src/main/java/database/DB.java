@@ -1,10 +1,13 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class DB {
+
     public static Connection getConnection() {
         Connection connection = null;
         try {

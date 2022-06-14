@@ -9,10 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    public UserServiceImpl() {
-    }
-
-    private static final String GET_ALL_USERS = "SELECT id, username, \"fullName\", password, \"phoneNumber\", email, \"createdTime\"\n" +
+    private static final String GET_ALL_USERS = "SELECT id, username, fullname," +
+            " password, \"phoneNumber\", email, \"createdTime\"\n" +
             "\tFROM public.users;";
     private static final String GET_BY_ID = "SELECT id, username, \"fullName\", password, \"phoneNumber\", email, \"createdDate\"\n" +
             "\tFROM public.\"Users\" where \"id\"=;";
@@ -90,4 +88,51 @@ public class UserServiceImpl implements UserService {
         }
         return rowDeleted;
     }
+//
+//    @Override
+//    public Boolean existByEmail(String email) throws SQLException {
+//        Connection connection = DB.getConnection();
+//        try {
+//            PreparedStatement ps = connection.prepareStatement("select name from people where email=?");
+//            ps.setString(1, email);
+//            //     int i = ps.executeUpdate();
+//            ResultSet resultSet = ps.executeQuery();
+//
+//            return resultSet.next();
+//
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        connection.close();
+//        return false;
+//    }
+
+//    @Override
+//    public Users getByUserId(Long id) throws SQLException {
+//        Users users = new Users();
+//        Connection connection = DB.getConnection();
+//        PreparedStatement preparedStatement = connection.prepareStatement("select * from people where email=?");
+//        preparedStatement.setString(1, email);
+//        ResultSet rs = preparedStatement.executeQuery();
+//        while (rs.next()) {
+//            users.setId(rs.getInt(1));
+//            users.setName(rs.getString(2));
+//            users.setEmail(rs.getString(3));
+//            users.setPassword(rs.getString(4));
+//
+//        }
+//        connection.close();
+//        return users;
+//    }
+
+    //    @Override
+//    public boolean delete(int email){
+//        int res = 0;
+//        Connection connection = DB.getConnection();
+//        PreparedStatement preparedStatement = connection.prepareStatement("delete from people where email=?");
+//        preparedStatement.setString(1, email);
+//        int i = preparedStatement.executeUpdate();
+//
+//    }
 }
