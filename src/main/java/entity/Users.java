@@ -3,8 +3,6 @@ package entity;
 import java.util.Date;
 
 public class Users {
-
-
     private Long id;
     private String username;
     private String fullName;
