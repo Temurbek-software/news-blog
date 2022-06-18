@@ -1,13 +1,12 @@
 package service.product;
 
 import entity.Product;
+import payload.ProductResponse;
 
 import java.util.List;
 
 public interface ProductService {
-    List<Product> getAllProduct();
+    List<ProductResponse> getAllProduct();
     Product getOne(Long id);
-    boolean save(Product product);
-    boolean delete(Long id);
-    String updateProduct(Long id,Product product);
+
 }
