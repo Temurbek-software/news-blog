@@ -15,6 +15,14 @@ public class Product {
     public Product() {
     }
 
+    public Product(String titles, String description, String sourcelinkTo, Date createdTime, String photofile) {
+        this.titles = titles;
+        this.description = description;
+        this.sourcelinkTo = sourcelinkTo;
+        this.createdTime = createdTime;
+        this.photofile = photofile;
+    }
+
     public Product(Long id, String titles,
                    String description,
                    String sourcelinkTo,
