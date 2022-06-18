@@ -8,17 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-    <title>Online news blog</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/image/favicon.ico"/>
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="assets/css/styles.css" rel="stylesheet"/>
-</head>
+<jsp:include page="../header/header2.jsp"></jsp:include>
 <body>
 <%--<jsp:include page="header/header.jsp"></jsp:include>--%>
 <jsp:include page="../header/header.jsp"></jsp:include>
