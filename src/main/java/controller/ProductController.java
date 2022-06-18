@@ -3,6 +3,7 @@ package controller;
 import entity.Category;
 import entity.Product;
 
+import payload.ProductResponse;
 import service.category.CategoryService;
 import service.product.ProductService;
 import service.product.ProductServiceImpl;
@@ -22,7 +23,8 @@ public class ProductController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ProductService productService;
 
-    public void init() {
+    public void init()
+    {
         productService = new ProductServiceImpl();
     }
 
@@ -49,7 +51,7 @@ public class ProductController extends HttpServlet {
 
     private void newsList(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<Product> productList = productService.getAllProduct();
+        List<ProductResponse> productList = productService.getAllProduct();
         List<Category> categoryList = CategoryService.categoryList();
         request.setAttribute("categoryList", categoryList);
         request.setAttribute("productList", productList);
