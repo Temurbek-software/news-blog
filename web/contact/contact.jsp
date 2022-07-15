@@ -1,14 +1,134 @@
-<%@ page import="payload.CookieService" %>
-<%@ page import="entity.Users" %>
 <%--
   Created by IntelliJ IDEA.
   User: Temurbek
-  Date: 6/12/2022
-  Time: 8:36 PM
+  Date: 7/10/2022
+  Time: 5:32 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="payload.CookieService" %>
+<%@ page import="entity.Users" %>
+<%@ page import="java.util.List" %>
+<%@ page import="entity.Publisher" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Arrays" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Contact</title>
+    <jsp:include page="../header/header2.jsp"></jsp:include>
+    <style>
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #BA68C8
+        }
+
+        .profile-button {
+            background: rgb(99, 39, 120);
+            box-shadow: none;
+            border: none
+        }
+
+        .profile-button:hover {
+            background: #682773
+        }
+
+        .profile-button:focus {
+            background: #682773;
+            box-shadow: none
+        }
+
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none
+        }
+
+        .back:hover {
+            color: #682773;
+            cursor: pointer
+        }
+
+        .labels {
+            font-size: 11px
+        }
+
+        .add-experience:hover {
+            background: #BA68C8;
+            color: #fff;
+            cursor: pointer;
+            border: solid 1px #BA68C8
+        }
+
+        .card1 {
+            background-color: #142948;
+            border-radius: 15px;
+            height: 200px;
+        }
+
+        .card2 {
+            background-color: #fff;
+            border-radius: 15px;
+            border: 2px solid #919ba9;
+            height: 300px;
+
+        }
+
+        .first {
+            color: #a4adb8;
+        }
+
+        .text1 {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .detail {
+            color: #a4adb8;
+        }
+
+        .readmore {
+            font-weight: 400;
+            color: #fff;
+        }
+
+        .btn-submit {
+            border-radius: 50px;
+            border: none;
+            height: 35px;
+            width: 120px;
+            font-size: 14px;
+            font-weight: 500;
+
+        }
+
+        .text2 {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .second {
+            color: #8b96a5;
+
+        }
+
+        .btn-submit1 {
+            border-radius: 50px;
+            border: none;
+            height: 35px;
+            width: 120px;
+            font-size: 14px;
+            background-color: #f1884d;
+            color: #fff;
+            font-weight: 500;
+
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+<%--<jsp:include page="../header/header.jsp"></jsp:include>--%>
+
 <style>
     #success_tic .page-body {
         max-width: 300px;
@@ -47,6 +167,7 @@
         background: #1ab394;
         position: absolute;
     }
+
     .checkmark-circle .background2 {
         width: 150px;
         height: 150px;
@@ -170,6 +291,76 @@
     }
 
 </style>
+<style>
+    body {
+        background-color: #eee
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px
+    }
+
+    .c-details span {
+        font-weight: 300;
+        font-size: 13px
+    }
+
+    .icon {
+        width: 50px;
+        height: 50px;
+        background-color: #eee;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 39px
+    }
+
+    .badge span {
+        background-color: #fffbec;
+        width: 60px;
+        height: 25px;
+        padding-bottom: 3px;
+        border-radius: 5px;
+        display: flex;
+        color: #fed85d;
+        justify-content: center;
+        align-items: center
+    }
+
+    .progress {
+        height: 10px;
+        border-radius: 10px
+    }
+
+    .progress div {
+        background-color: red
+    }
+
+    .text1 {
+        font-size: 14px;
+        font-weight: 600
+    }
+
+    .text2 {
+        color: #a5aec0
+    }
+
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
+</style>
 <%
     CookieService service = new CookieService();
     Users user = service.getCurrentUser(request);
@@ -184,7 +375,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/aboutUs">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="modal" href="#exampleModal">
                         Subscribtion
@@ -219,22 +410,13 @@
     </div>
 </nav>
 <c:if test="${falseUser==false}">
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Wrong user Brug!</strong> You should sign up right here.
-    <a href="/register/registration.jsp">Signup</a>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-    </button>
-</div>
-</c:if>
-<!-- Page header with logo and tagline-->
-<header class="py-5 bg-light border-bottom mb-4">
-    <div class="container my-5">
-        <div class="text-center my-5">
-            <h1 class="fw-bolder">Welcome to our news world</h1>
-            <p class="lead mb-0">Enjoy the life</p>
-        </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Wrong user Brug!</strong> You should sign up right here.
+        <a href="/register/registration.jsp">Signup</a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        </button>
     </div>
-</header>
+</c:if>
 <%--Login modal--%>
 <div class="modal fade" id="ModalForm" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -347,8 +529,6 @@
         }
     }
 </script>
-
-
 <%--success modal--%>
 <div id="success_tic" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -373,3 +553,88 @@
     </div>
 
 </div>
+<%--Our publishers--%>
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">contact</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <c:if test="${msg==true}">
+            <div class="alert alert-success" role="alert">
+                Sent successfully
+            </div>
+        </c:if>
+        <c:if test="${msg==false}">
+            <div class="alert alert-danger" role="alert">
+                Something wrong, please retry again
+            </div>
+        </c:if>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+
+                    <div class="card-body text-center">
+                        <h5 class="my-3">Location</h5>
+                    </div>
+
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <p class="my-3 text-muted mb-0">Washington DC has a latitude 38.8951 and longitude -77.0364</p>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="my-3 text-muted mb-0">Central America and the Caribbean.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form action="saveContact" method="post"  id="contactForm">
+
+                            <!-- Name input -->
+                            <div class="mb-3">
+                                <label class="form-label" for="name">Name</label>
+                                <input name="username" class="form-control" id="name" type="text" placeholder="Name"/>
+                            </div>
+
+                            <!-- Email address input -->
+                            <div class="mb-3">
+                                <label class="form-label" for="emailAddress">Email Address</label>
+                                <input name="email" class="form-control" id="emailAddress" type="email" placeholder="Email Address"/>
+                            </div>
+
+                            <!-- Message input -->
+                            <div class="mb-3">
+                                <label class="form-label" for="message">Message</label>
+                                <textarea name="textMassage" class="form-control" id="message" type="text" placeholder="Message"
+                                          style="height: 10rem;"></textarea>
+                            </div>
+
+                            <!-- Form submit button -->
+                            <div class="d-grid">
+                                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+<jsp:include page="../footer/footer.jsp"></jsp:include>
+</body>
+</html>

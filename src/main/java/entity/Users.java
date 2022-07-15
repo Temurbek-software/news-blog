@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Users {
     private Long id;
@@ -9,43 +10,76 @@ public class Users {
     private String password;
     private String phoneNumber;
     private String email;
-    private Date createdTime;
+    private boolean isActive;
+    private boolean isDeleted;
+    private boolean isBlocked;
 
-    public Users() {
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public Users(String username,
-                 String fullName,
-                 String password,
-                 String phoneNumber,
-                 String email,
-                 Date createdTime)
-    {
-        super();
-        this.username = username;
-        this.fullName = fullName;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.createdTime = createdTime;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
-    public Users(Long id,
-                 String username,
-                 String fullName,
-                 String password,
-                 String phoneNumber,
-                 String email,
-                 Date createdTime)
-    {
-        super();
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
+    }
+
+    private Date created_at;
+    private Date updated_at;
+
+    public Users(Long id, String username, String fullName, String password, String phoneNumber, String email, boolean isActive, boolean isDeleted, boolean isBlocked, Date created_at, Date updated_at) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.createdTime = createdTime;
+        this.isActive = isActive;
+        this.isDeleted = isDeleted;
+        this.isBlocked = isBlocked;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+
+    public Users(Long id, String username,
+                 String fullName, String password,
+                 String phoneNumber, String email,
+                 Date created_at,
+                 Date updated_at)
+    {
+        this.id = id;
+        this.username = username;
+        this.fullName = fullName;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+
+    public Users(String username,
+                 String fullName,
+                 String password, String phoneNumber,
+                 String email, Date created_at,
+                 Date updated_at)
+    {
+        this.username = username;
+        this.fullName = fullName;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+
+    public Users() {
+
     }
 
     public Long getId() {
@@ -96,12 +130,28 @@ public class Users {
         this.email = email;
     }
 
-    public Date getCreatedTime() {
-        return createdTime;
+    public Date getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+
+    public Date getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Date updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     @Override
@@ -113,28 +163,28 @@ public class Users {
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
-                ", createdTime=" + createdTime +
+                ", isActive=" + isActive +
+                ", isDeleted=" + isDeleted +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Users)) return false;
+        Users users = (Users) o;
+        return username.equals(users.username)
+                && fullName.equals(users.fullName)
+                && password.equals(users.password) &&
+                phoneNumber.equals(users.phoneNumber) &&
+                email.equals(users.email);
+    }
+
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 32));
-        return result;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Users other = (Users) obj;
-        if (id != other.id)
-            return false;
-        return true;
+        return Objects.hash(username, fullName, password, phoneNumber, email);
     }
 }
 

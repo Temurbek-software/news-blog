@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class DB {
 
@@ -38,7 +37,7 @@ public class DB {
     }
 
 
-    public static java.sql.Date getUtilDate(java.util.Date utilDate) {
-        return new java.sql.Date(utilDate.getTime());
+    public static Date getUtilDate(java.util.Date utilDate) {
+        return new Date(utilDate.getTime());
     }
 }

@@ -3,7 +3,9 @@ package service.category;
 import database.DB;
 import entity.Category;
 import entity.Product;
+import org.apache.tomcat.util.codec.binary.Base64;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,31 +17,29 @@ import java.util.List;
 public class CategoryService {
     private static final String GET_CATEGORY_LIST = "SELECT id, name\n" +
             "\tFROM public.category;";
-    private static final String GET_ONE_PRODUCT = "SELECT id, titles, description, \"sourcelinkTo\", \"createdTime\", photofile\n" +
-            "\tFROM public.product where category_id=?";
-    public static List<Product> getProductByCategory(int num)
-    {
+    private static final String GET_ONE_PRODUCT = "SELECT id, titles,  description, sourcelinkto, photofile, created_at,\n" +
+            "updated_at FROM public.product where category_id=?";
+
+    public static List<Product> getProductByCategory(int num) {
         List<Product> categoryList = new ArrayList<>();
         try (Connection connection = DB.getConnection();
-             // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(GET_ONE_PRODUCT);) {
             System.out.println(preparedStatement);
-            preparedStatement.setInt(1,num);
-            // Step 3: Execute the query or update query
+            preparedStatement.setInt(1, num);
             ResultSet rs = preparedStatement.executeQuery();
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
                 Long id = rs.getLong("id");
                 String titles = rs.getString("titles");
                 String description = rs.getString("description");
-                String sourcelinkTo = rs.getString("sourcelinkTo");
-                Date createdTime = rs.getDate("createdTime");
-                String photofile = rs.getString("photofile");
-                categoryList.add(new Product(id, titles, description, sourcelinkTo,
-                        createdTime, photofile));
+                String sourcelinkTo = rs.getString("sourcelinkto");
+                String photofile =new String(Base64.encodeBase64(rs.getBytes("photofile")), "UTF-8");
+                Date created_at = rs.getDate("created_at");
+                Date updated_at = rs.getDate("updated_at");
+                categoryList.add(new Product(id, titles, description, sourcelinkTo, photofile,
+                        created_at, updated_at));
             }
-        } catch (SQLException exception) {
-            DB.printSQLException(exception);
+        } catch (SQLException | UnsupportedEncodingException exception) {
+            DB.printSQLException((SQLException) exception);
         }
         return categoryList;
     }
@@ -47,12 +47,9 @@ public class CategoryService {
     public static List<Category> categoryList() {
         List<Category> categoryList = new ArrayList<>();
         try (Connection connection = DB.getConnection();
-             // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(GET_CATEGORY_LIST);) {
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
                 Long id = rs.getLong("id");
                 String name = rs.getString("name");
